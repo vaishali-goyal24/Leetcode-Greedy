@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool canConstruct(string s, int k) {
+        if(s.size()<k)
+            return false;
+        int i,countOfOdd=0;
+        int freq[27]={0};
+        for(i=0;i<s.size();i++)
+        {
+            freq[s[i]-'a']++;
+        }
+        for(i=0;i<26;i++)
+        {
+            if(freq[i]%2)
+                countOfOdd++;
+        }
+        if(countOfOdd>k)
+            return false;
+        return true;
+    }
+};
