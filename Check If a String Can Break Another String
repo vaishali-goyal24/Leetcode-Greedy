@@ -1,0 +1,59 @@
+// approach using sorting (O(nlogn))
+
+class Solution {
+public:
+    bool checkIfCanBreak(string s1, string s2) {
+      sort(s1.begin(),s1.end());
+        sort(s2.begin(),s2.end());
+        bool a=true;
+        bool b=true;
+        
+      for(int i=0;i<s1.size();i++)
+      {
+          if(s1[i]>s2[i]) b=false;
+          if(s2[i]>s1[i]) a=false;
+          
+      }
+        return (a||b);
+    }
+};
+
+
+// approach without sorting (O(n))
+
+class Solution {
+public:
+    
+    bool c(string s1, string s2)
+    {
+        vector<int>v(26,0);
+        for(int i=0;i<s2.size();i++)
+        {
+            v[s2[i]-'a']++;
+            
+        }
+        
+        for(int i=0;i<s1.size();i++)
+        {
+           // v[s1[i]-'a']++;
+            for(int j=s1[i]-'a';j<26;j++)
+            {
+                if(v[j])
+                {
+                    v[j]--;
+                    break;
+                }
+                if(j==25)
+                    return false;
+            }
+            
+        }
+        return true;
+        
+    }
+    bool checkIfCanBreak(string s1, string s2) 
+    {
+        return (c(s1,s2) || c(s2,s1));
+        
+    }
+};
